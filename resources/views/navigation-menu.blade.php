@@ -18,7 +18,7 @@
                 </div>
                 @if(auth()->user()->usertype == "admin")
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ url('/login') }}" :active="request()->routeIs('/login')">
+                    <x-jet-nav-link href="{{ url('/addbed') }}" :active="request()->routeIs('/addbed')">
                         {{ __('Add BED') }}
                     </x-jet-nav-link>
                 </div>
