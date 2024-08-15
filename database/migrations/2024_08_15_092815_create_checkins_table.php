@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
-class CreateAddbedsTable extends Migration
+class CreateCheckinsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,17 +13,17 @@ class CreateAddbedsTable extends Migration
      */
     public function up()
     {
-        
-        Schema::create('addbeds', function (Blueprint $table) 
-        {
+        Schema::create('checkins', function (Blueprint $table) {
             $table->id();
-            $table->string('division')->nullable();
+            $table->integer('bedid')->nullable();
+            $table->integer('bedno')->nullable();
             $table->string('station')->nullable();
-            $table->string('floor')->nullable();
-            $table->string('bedno')->nullable();
-            $table->integer('bedstatus')->default(0);
-            $table->string('addedby')->nullable();
+            $table->string('division')->nullable();
+            $table->string('crewname')->nullable();
+            $table->string('crewid')->nullable();
+            $table->string('tokenno')->nullable();
             $table->timestamps();
+
         });
     }
 
@@ -35,6 +34,6 @@ class CreateAddbedsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addbeds');
+        Schema::dropIfExists('checkins');
     }
 }

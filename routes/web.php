@@ -35,3 +35,5 @@ Route::get('/home', [AdminController::class, 'index']);
 Route::get('/addbed', [AdminController::class, 'addbed']);
 
 Route::post('/addbeds',[AdminController::class, 'addbeds']);
+Route::post('/checkins',[AdminController::class, 'checkins']);
+
