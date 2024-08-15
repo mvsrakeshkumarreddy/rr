@@ -109,5 +109,40 @@ public function checkins(Request $request)
 }
 
 
+public function checkouts(Request $request)
+{
+
+/*
+	$checkoutdata = new Checkout;
+	$checkoutdata->cbedid = $request->cbedid;
+	$checkoutdata->cbedno = $request->cbedno;
+	//$checkoutdata->division = $request->division;
+	//$checkoutdata->station = $request->station;
+	$checkoutdata->ccrewid = $request->ccrewid;
+	//$checkoutdata->crewname = strtoupper($request->crewname);
+	//$checkoutdata->tokenno = $request->tokenno;
+	$checkoutdata->ccheckintime = $request->ccheckintime;
+	//$checkoutdata->save();
+*/
+	date_default_timezone_set('Asia/Kolkata');
+	$checkouttime = date('Y-m-d H:i:s');
+
+
+	//$bedstatuschange = addbed::where('id', $checkindata->bedid)->get();
+	
+
+	DB::table('addbeds')->where('id', $request->cbedid)->update(['bedstatus' => 0, 'crewid' => null, 'crewname' => null, 'tokenno' => null,  'checkintime' => null]);
+	DB::table('checkins')->where('bedid', $request->cbedid)->whereNull('checkouttime')->update(['checkouttime' => $checkouttime]);
+	
+
+
+
+	
+
+	\Session::flash('success', 'Data inserted Successfully.');
+    return redirect()->back();
+
+}
+
 
 }
