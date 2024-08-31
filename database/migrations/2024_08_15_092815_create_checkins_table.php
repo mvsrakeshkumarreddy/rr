@@ -18,6 +18,7 @@ class CreateCheckinsTable extends Migration
             $table->integer('bedid')->nullable();
             $table->integer('bedno')->nullable();
             $table->string('station')->nullable();
+            $table->integer('building')->nullable();
             $table->string('division')->nullable();
             $table->string('crewname')->nullable();
             $table->string('crewid')->nullable();

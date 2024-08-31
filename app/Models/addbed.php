@@ -11,6 +11,7 @@ class addbed extends Model
      protected $fillable = [
         'division',
         'station',
+        'building',
         'floor',
         'bedno',
     ];

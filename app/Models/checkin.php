@@ -11,6 +11,7 @@ class checkin extends Model
      protected $fillable = [
         'bedno',
         'station',
+        'building',
         'division',
         'bedno',
         'crewname',

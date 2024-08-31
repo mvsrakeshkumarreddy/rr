@@ -23,12 +23,18 @@ class AdminController extends Controller
     			$beddetails = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->get();
     			//$bedcheckdetails = checkin::orderBy('bedno', 'ASC')->where('station', $userstationcode)->whereNull('checkouttime')->get();
     			//$bedcheckdetails = DB::table('addbeds')->leftJoin('checkins', 'addbeds.id', '=', 'checkins.bedid')->whereNull('checkins.checkouttime')->get();
-    			return view('user.index', compact('beddetails'));
+    			$groundfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('floor', 0)->get();
+    			$firstfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('floor', 1)->get();
+    			$secondfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('floor', 2)->get();
+    			return view('user.index', compact('beddetails','groundfloor','firstfloor','secondfloor'));
     		}
     		elseif ($usertype == 'admin') 
     		{
     			$beddetails = addbed::orderBy('bedno', 'ASC')->get();
-    			return view('admin.index', compact('beddetails'));
+    			$groundfloor = addbed::orderBy('bedno', 'ASC')->where('floor', 0)->get();
+    			$firstfloor = addbed::orderBy('bedno', 'ASC')->where('floor', 1)->get();
+    			$secondfloor = addbed::orderBy('bedno', 'ASC')->where('floor', 2)->get();
+    			return view('admin.index', compact('beddetails','groundfloor','firstfloor','secondfloor'));
     		}
     		else
     		{
@@ -66,6 +72,7 @@ class AdminController extends Controller
     	$beddata = new Addbed;
     	$beddata->division = strtoupper($request->division);
     	$beddata->station =  strtoupper($request->station);
+    	$beddata->building =  $request->building;
     	$beddata->floor = strtoupper($request->floor);
     	$beddata->bedno =  $request->bedno;
     	$beddata->addedby = strtoupper($request->addedby);
@@ -86,8 +93,10 @@ public function checkins(Request $request)
 	$checkindata->bedno = $request->bedno;
 	$checkindata->division = $request->division;
 	$checkindata->station = $request->station;
+	$checkindata->building = $request->building;
 	$checkindata->crewid = strtoupper($request->crewid);
 	$checkindata->crewname = strtoupper($request->crewname);
+	$checkindata->desig = strtoupper($request->desig);
 	$checkindata->tokenno = $request->tokenno;
 	$checkindata->checkintime = $request->checkintime;
 	$checkindata->save();
@@ -96,7 +105,7 @@ public function checkins(Request $request)
 	//$bedstatuschange = addbed::where('id', $checkindata->bedid)->get();
 	
 
-	DB::table('addbeds')->where('id', $request->bedid)->update(['bedstatus' => 1, 'crewid' => $checkindata->crewid, 'crewname' => $checkindata->crewname, 'tokenno' => $checkindata->tokenno, 'checkintime' => $checkindata->checkintime,]);
+	DB::table('addbeds')->where('id', $request->bedid)->update(['bedstatus' => 1, 'crewid' => $checkindata->crewid, 'crewname' => $checkindata->crewname, 'desig' => $checkindata->desig, 'tokenno' => $checkindata->tokenno, 'checkintime' => $checkindata->checkintime,]);
 	
 
 
@@ -131,7 +140,7 @@ public function checkouts(Request $request)
 	//$bedstatuschange = addbed::where('id', $checkindata->bedid)->get();
 	
 
-	DB::table('addbeds')->where('id', $request->cbedid)->update(['bedstatus' => 0, 'crewid' => null, 'crewname' => null, 'tokenno' => null,  'checkintime' => null]);
+	DB::table('addbeds')->where('id', $request->cbedid)->update(['bedstatus' => 0, 'crewid' => null, 'crewname' => null, 'desig' => null, 'tokenno' => null,  'checkintime' => null]);
 	DB::table('checkins')->where('bedid', $request->cbedid)->whereNull('checkouttime')->update(['checkouttime' => $checkouttime]);
 	
 

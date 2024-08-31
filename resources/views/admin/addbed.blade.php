@@ -34,7 +34,14 @@
                 <x-jet-input style="text-transform: uppercase;" id="station" class="block mt-1 w-full" type="text" name="station" :value="old('station')" required autofocus autocomplete="station" />
             </div>
 
-     
+     		<div>
+     			<x-jet-label for="building" value="{{ __('Building No') }}" />
+					<select class="form-select" id="building" name="building">
+					  <option value="1">1</option>
+					  <option value="2">2</option>
+					</select>
+     		</div>
+
             <div>
             <br>
                 <input type="radio" id="floor" name="floor" value="0">
@@ -43,9 +50,9 @@
   				<label for="floor">First Floor</label>
  				<input type="radio" id="floor" name="floor" value="2">
   				<label for="floor">Second Floor</label>
-<br>
                 
             </div>
+<br>
 
             <div>
                 <x-jet-label for="bedno" value="{{ __('Bedno') }}" />
