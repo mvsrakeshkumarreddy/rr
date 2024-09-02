@@ -27,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'stationcode',
+        'building',
         'desig',
         'password',
         'usertype'

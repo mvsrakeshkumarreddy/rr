@@ -23,6 +23,13 @@
                 <x-jet-label for="stationcode" value="{{ __('Station Code') }}" />
                 <x-jet-input style="text-transform: uppercase;" id="stationcode" class="block mt-1 w-full" type="text" name="stationcode" :value="old('stationcode')" required autofocus autocomplete="stationcode" />
             </div>
+            <div>
+                <x-jet-label for="building" value="{{ __('Building No') }}" />
+                    <select class="form-select" id="building" name="building">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                    </select>
+            </div>
 
             <div>
                 <x-jet-label for="desig" value="{{ __('Desig') }}" />

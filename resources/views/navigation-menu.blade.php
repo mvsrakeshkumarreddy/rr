@@ -10,6 +10,7 @@
                     </a>
                 </div>
 
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ url('/home') }}" :active="request()->routeIs('/home')">
@@ -20,6 +21,13 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ url('/addbed') }}" :active="request()->routeIs('/addbed')">
                         {{ __('Add BED') }}
+                    </x-jet-nav-link>
+                </div>
+                @endif
+                @if(auth()->user()->usertype == "admin")
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ url('/checkinsummary') }}" :active="request()->routeIs('/checkinsummary')">
+                        {{ __('Checkin Summary') }}
                     </x-jet-nav-link>
                 </div>
                 @endif
@@ -151,6 +159,20 @@
                 {{ __('Home') }}
             </x-jet-responsive-nav-link>
         </div>
+        @if(auth()->user()->usertype == "admin")
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ url('/addbed') }}" :active="request()->routeIs('/addbed')">
+                {{ __('Add Bed') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        @endif
+        @if(auth()->user()->usertype == "admin")
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ url('/checkinsummary') }}" :active="request()->routeIs('/checkinsummary')">
+                {{ __('Checkin Summary') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        @endif
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

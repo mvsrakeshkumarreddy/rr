@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('stationcode');
+            $table->integer('building');
             $table->string('desig');
             $table->string('usertype')->default('user');
             $table->timestamp('email_verified_at')->nullable();

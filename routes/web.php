@@ -37,4 +37,5 @@ Route::get('/addbed', [AdminController::class, 'addbed']);
 Route::post('/addbeds',[AdminController::class, 'addbeds']);
 Route::post('/checkins',[AdminController::class, 'checkins']);
 Route::post('/checkouts',[AdminController::class, 'checkouts']);
+Route::get('/checkinsummary',[AdminController::class, 'checkinsummary']);
 
