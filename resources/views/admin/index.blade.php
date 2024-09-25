@@ -47,17 +47,19 @@
       <div class="accordion-body">
      
  <div class="content">
-          <div ng-repeat = "beddetails in beddetails | filter:search ">
-      <div class="card" ng-style="beddetails.bedstatus == 0 && {'background-color':'green'}  || beddetails.bedstatus == 1 && {'background-color':'red'}" ng-show = "beddetails.floor == 0">
-      <p style="font-size: 15px;font-weight: bold;color: white;">[[beddetails.crewid]] <span ng-show = "beddetails.bedstatus == 1"> - [[beddetails.checkintime]] Rest Hrs</span></p>
+          <div ng-repeat = "beddetails in beddetails | filter:search " style="padding-right: 2px;">
+     
+          <div class="mixcard" ng-style="beddetails.bedstatus == 0 && {'background-color':'green'}  || beddetails.bedstatus == 1 && {'background-color':'red'}" ng-show = "beddetails.floor == 0">
+              
+          <div  ng-show = "beddetails.floor == 0" style="color: white;">[[beddetails.roomno]]<i class="material-icons md-48">home</i></div>
 
-            <div class="icon">[[beddetails.bedno]]<i class="material-icons md-48">bedroom_child</i></div>
+            <div ng-show = "beddetails.floor == 0" style="color: white;">[[beddetails.bedno]]<i class="material-icons md-48">bedroom_child</i></div>
+          </div>
+
+
+
             
            
-            <p class="title">[[beddetails.crewname]] <span ng-show = "beddetails.bedstatus == 1">/</span> [[beddetails.desig]]</p>
-           
-      </div>
-          </div>
       </div>
 
 
@@ -76,7 +78,9 @@
       <div class="accordion-body">
        
 <div class="content">
-          <div ng-repeat = "beddetails in beddetails | filter:search ">
+          <div ng-repeat = "beddetails in beddetails | filter:search " style="padding-right: 2px;">
+<!--
+
       <div class="card" ng-style="beddetails.bedstatus == 0 && {'background-color':'green'}  || beddetails.bedstatus == 1 && {'background-color':'red'}" ng-show = "beddetails.floor == 1">
       <p style="font-size: 15px;font-weight: bold;color: white;">[[beddetails.crewid]] <span ng-show = "beddetails.bedstatus == 1"> - [[beddetails.checkintime]] Rest Hrs</span></p>
 
@@ -86,6 +90,14 @@
             <p class="title">[[beddetails.crewname]] <span ng-show = "beddetails.bedstatus == 1">/</span> [[beddetails.desig]]</p>
            
       </div>
+-->
+
+ <div class="mixcard" ng-style="beddetails.bedstatus == 0 && {'background-color':'green'}  || beddetails.bedstatus == 1 && {'background-color':'red'}" ng-show = "beddetails.floor == 1">
+              
+          <div  ng-show = "beddetails.floor == 1" style="color: white;">[[beddetails.roomno]]<i class="material-icons md-48">home</i></div>
+
+            <div ng-show = "beddetails.floor == 1" style="color: white;">[[beddetails.bedno]]<i class="material-icons md-48">bedroom_child</i></div>
+          </div>
           </div>
       </div>
 
@@ -105,7 +117,9 @@
       <div class="accordion-body">
     
 <div class="content">
-          <div ng-repeat = "beddetails in beddetails | filter:search ">
+          <div ng-repeat = "beddetails in beddetails | filter:search " style="padding-right: 2px;">
+
+<!--
       <div class="card" ng-style="beddetails.bedstatus == 0 && {'background-color':'green'}  || beddetails.bedstatus == 1 && {'background-color':'red'}" ng-show = "beddetails.floor == 2">
       <p style="font-size: 15px;font-weight: bold;color: white;">[[beddetails.crewid]] <span ng-show = "beddetails.bedstatus == 1"> - [[beddetails.checkintime]] Rest Hrs</span></p>
 
@@ -115,6 +129,15 @@
             <p class="title">[[beddetails.crewname]] <span ng-show = "beddetails.bedstatus == 1">/</span> [[beddetails.desig]]</p>
            
       </div>
+-->
+ <div class="mixcard" ng-style="beddetails.bedstatus == 0 && {'background-color':'green'}  || beddetails.bedstatus == 1 && {'background-color':'red'}" ng-show = "beddetails.floor == 2">
+              
+          <div  ng-show = "beddetails.floor == 2" style="color: white;">[[beddetails.roomno]]<i class="material-icons md-48">home</i></div>
+
+            <div ng-show = "beddetails.floor == 2" style="color: white;">[[beddetails.bedno]]<i class="material-icons md-48">bedroom_child</i></div>
+          </div>
+
+
           </div>
       </div>
 

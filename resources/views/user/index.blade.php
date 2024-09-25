@@ -19,6 +19,7 @@
           <div class="mb-3">
             <input type="hidden" class="form-control" id="bedid" name="bedid" :value="old('bedid')">
             <input type="hidden" class="form-control" id="bedno" name="bedno" :value="old('bedno')">
+            <input type="hidden" class="form-control" id="roomno" name="roomno" :value="old('roomno')">
             <input type="hidden" class="form-control" id="station" name="station" :value="old('station')">
             <input type="hidden" class="form-control" id="division" name="division" :value="old('division')">
             <input type="hidden" class="form-control" id="building" name="building" :value="old('building')">
@@ -63,6 +64,8 @@
 
 
 
+
+
 <div class="modal fade" id="checkoutexampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -77,6 +80,7 @@
           <div class="mb-3">
             <input type="hidden" class="form-control" id="cbedid" name="cbedid" :value="old('cbedid')">
             <input type="hidden" class="form-control" id="cbedno" name="cbedno" :value="old('cbedno')">
+            <input type="hidden" class="form-control" id="croomno" name="croomno" :value="old('croomno')">
             <input type="hidden" class="form-control" id="ccrewname" name="ccrewname" :value="old('ccrewname')">
             <input type="hidden" class="form-control" id="ccheckintime" name="ccheckintime" :value="old('ccheckintime')">
             <input type="hidden" class="form-control" id="cbuilding" name="cbuilding" :value="old('cbuilding')">
@@ -91,6 +95,15 @@
       </div>
     </div>
   </div>
+</div>
+
+
+<div class="content" ng-show = "buildingvisible">
+    
+<input type="radio" id="building" ng-model = "searchbuilding" value="1" ng-checked ="true">
+                <label for="building">Building - 1</label>&nbsp;
+                <input type="radio" id="building" ng-model = "searchbuilding" value="2">
+                <label for="building">Building - 2</label>&nbsp;
 </div>
 
 
@@ -124,18 +137,22 @@
     }
     @endphp
 
-      <div class="card" style="background-color: {{$colorr}}">
+
+
+
+      <div class="usermixcard" style="background-color: {{$colorr}}" ng-if="searchbuilding == {{$beddetails->building}}">
       <p style="font-size: 15px;font-weight: bold;color: white;">{{$beddetails->crewid}}@if($beddetails->checkintime != null) -   {{round(((-strtotime($beddetails->checkintime)+strtotime(date('Y-m-d H:i:s')))/60+330)/60,2)}} Rest Hrs @endif</p>
 
-            <div class="icon">{{$beddetails->bedno}}<i class="material-icons md-48">bedroom_child</i></div>
+            <div style="color: white;">{{$beddetails->roomno}}<i class="material-icons md-48">home</i>{{$beddetails->bedno}}<i class="material-icons md-48">bedroom_child</i></div>
             @if($beddetails->bedstatus == 0)
-            <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text showdetails" data-details="Check-in" data-bedno="{{$beddetails->bedno}}" data-bedid="{{$beddetails->id}}" data-station="{{$beddetails->station}}" data-division="{{$beddetails->division}}" data-building="{{$beddetails->building}}">Check-in</a>
+            <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text showdetails" data-details="Check-in" data-bedno="{{$beddetails->bedno}}" data-bedid="{{$beddetails->id}}" data-station="{{$beddetails->station}}" data-division="{{$beddetails->division}}" data-building="{{$beddetails->building}}" data-roomno="{{$beddetails->roomno}}">Check-in</a>
             @endif
             @if($beddetails->bedstatus == 1)
             <p class="title">{{$beddetails->crewname}} / {{$beddetails->desig}}</p>
-            <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#checkoutexampleModal" class="text showdetails" data-details="Check-out" data-cbedno="{{$beddetails->bedno}}" data-cbedid="{{$beddetails->id}}" data-ccrewid="{{$beddetails->crewid}}" data-ccrewname="{{$beddetails->crewname}}" data-cdesig="{{$beddetails->desig}}" data-ccheckintime="{{$beddetails->checkintime}}" data-cbuilding="{{$beddetails->building}}">Check-out</a>
+            <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#checkoutexampleModal" class="text showdetails" data-details="Check-out" data-cbedno="{{$beddetails->bedno}}" data-cbedid="{{$beddetails->id}}" data-ccrewid="{{$beddetails->crewid}}" data-ccrewname="{{$beddetails->crewname}}" data-cdesig="{{$beddetails->desig}}" data-ccheckintime="{{$beddetails->checkintime}}" data-cbuilding="{{$beddetails->building}}" data-croomno="{{$beddetails->roomno}}">Check-out</a>
             @endif
       </div>
+   
     @endforeach
       </div>
 
@@ -171,16 +188,16 @@
     }
     @endphp
 
-      <div class="card" style="background-color: {{$colorr}}">
+      <div class="usermixcard" style="background-color: {{$colorr}}" ng-if="searchbuilding == {{$beddetails->building}}">
       <p style="font-size: 15px;font-weight: bold;color: white;">{{$beddetails->crewid}}@if($beddetails->checkintime != null) -   {{round(((-strtotime($beddetails->checkintime)+strtotime(date('Y-m-d H:i:s')))/60+330)/60,2)}} Rest Hrs @endif</p>
 
-            <div class="icon">{{$beddetails->bedno}}<i class="material-icons md-48">bedroom_child</i></div>
+            <div style="color: white;">{{$beddetails->roomno}}<i class="material-icons md-48">home</i>{{$beddetails->bedno}}<i class="material-icons md-48">bedroom_child</i></div>
             @if($beddetails->bedstatus == 0)
-            <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text showdetails" data-details="Check-in" data-bedno="{{$beddetails->bedno}}" data-bedid="{{$beddetails->id}}" data-station="{{$beddetails->station}}" data-division="{{$beddetails->division}}" data-building="{{$beddetails->building}}">Check-in</a>
+            <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text showdetails" data-details="Check-in" data-bedno="{{$beddetails->bedno}}" data-bedid="{{$beddetails->id}}" data-station="{{$beddetails->station}}" data-division="{{$beddetails->division}}" data-building="{{$beddetails->building}}" data-roomno="{{$beddetails->roomno}}">Check-in</a>
             @endif
             @if($beddetails->bedstatus == 1)
             <p class="title">{{$beddetails->crewname}} / {{$beddetails->desig}}</p>
-            <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#checkoutexampleModal" class="text showdetails" data-details="Check-out" data-cbedno="{{$beddetails->bedno}}" data-cbedid="{{$beddetails->id}}" data-ccrewid="{{$beddetails->crewid}}" data-ccrewname="{{$beddetails->crewname}}" data-cdesig="{{$beddetails->desig}}" data-ccheckintime="{{$beddetails->checkintime}}" data-cbuilding="{{$beddetails->building}}">Check-out</a>
+            <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#checkoutexampleModal" class="text showdetails" data-details="Check-out" data-cbedno="{{$beddetails->bedno}}" data-cbedid="{{$beddetails->id}}" data-ccrewid="{{$beddetails->crewid}}" data-ccrewname="{{$beddetails->crewname}}" data-cdesig="{{$beddetails->desig}}" data-ccheckintime="{{$beddetails->checkintime}}" data-cbuilding="{{$beddetails->building}}" data-croomno="{{$beddetails->roomno}}">Check-out</a>
             @endif
       </div>
     @endforeach
@@ -215,16 +232,16 @@
     }
     @endphp
 
-      <div class="card" style="background-color: {{$colorr}}">
+      <div class="usermixcard" style="background-color: {{$colorr}}" ng-if="searchbuilding == {{$beddetails->building}}">
       <p style="font-size: 15px;font-weight: bold;color: white;">{{$beddetails->crewid}}@if($beddetails->checkintime != null) -   {{round(((-strtotime($beddetails->checkintime)+strtotime(date('Y-m-d H:i:s')))/60+330)/60,2)}} Rest Hrs @endif</p>
 
-            <div class="icon">{{$beddetails->bedno}}<i class="material-icons md-48">bedroom_child</i></div>
+            <div style="color: white;">{{$beddetails->roomno}}<i class="material-icons md-48">home</i>{{$beddetails->bedno}}<i class="material-icons md-48">bedroom_child</i></div>
             @if($beddetails->bedstatus == 0)
-            <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text showdetails" data-details="Check-in" data-bedno="{{$beddetails->bedno}}" data-bedid="{{$beddetails->id}}" data-station="{{$beddetails->station}}" data-division="{{$beddetails->division}}" data-building="{{$beddetails->building}}">Check-in</a>
+            <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text showdetails" data-details="Check-in" data-bedno="{{$beddetails->bedno}}" data-bedid="{{$beddetails->id}}" data-station="{{$beddetails->station}}" data-division="{{$beddetails->division}}" data-building="{{$beddetails->building}}" data-roomno="{{$beddetails->roomno}}">Check-in</a>
             @endif
             @if($beddetails->bedstatus == 1)
             <p class="title">{{$beddetails->crewname}} / {{$beddetails->desig}}</p>
-            <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#checkoutexampleModal" class="text showdetails" data-details="Check-out" data-cbedno="{{$beddetails->bedno}}" data-cbedid="{{$beddetails->id}}" data-ccrewid="{{$beddetails->crewid}}" data-ccrewname="{{$beddetails->crewname}}" data-cdesig="{{$beddetails->desig}}" data-ccheckintime="{{$beddetails->checkintime}}" data-cbuilding="{{$beddetails->building}}">Check-out</a>
+            <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#checkoutexampleModal" class="text showdetails" data-details="Check-out" data-cbedno="{{$beddetails->bedno}}" data-cbedid="{{$beddetails->id}}" data-ccrewid="{{$beddetails->crewid}}" data-ccrewname="{{$beddetails->crewname}}" data-cdesig="{{$beddetails->desig}}" data-ccheckintime="{{$beddetails->checkintime}}" data-cbuilding="{{$beddetails->building}}" data-croomno="{{$beddetails->roomno}}">Check-out</a>
             @endif
       </div>
     @endforeach
@@ -237,7 +254,33 @@
 
 
 
+<script>
+var rakeshApp = angular.module('rakeshApp', []);
+rakeshApp.config(function ($interpolateProvider) {
 
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+
+});
+rakeshApp.controller('rakeshCtrl', function($scope) {
+
+$scope.groundfloordetails = @json($groundfloor);
+$scope.firstfloordetails = @json($firstfloor);
+$scope.secondfloordetails = @json($secondfloor);
+
+for (var i = 0; i < $scope.groundfloordetails.length; i++) {
+    if($scope.groundfloordetails[i]['building'] == 2)
+    {
+        $scope.buildingvisible = true;
+    }
+}
+$scope.searchbuilding = 1;
+
+
+});
+
+
+</script>
 
     <script type="text/javascript">
         $(document).on('click', '.showdetails', function(e){
@@ -245,6 +288,8 @@
             let cbedno = $(this).data('cbedno');
             let bedid = $(this).data('bedid');
             let cbedid = $(this).data('cbedid');
+            let roomno = $(this).data('roomno');
+            let croomno = $(this).data('croomno');
             let details = $(this).data('details');
             let station = $(this).data('station');
             let building = $(this).data('building');
@@ -258,6 +303,8 @@
             $('.details').text(details);
             $('.bedid').text(bedid);
             $('.cbedid').text(cbedid);
+            $('.roomno').text(roomno);
+            $('.croomno').text(croomno);
             $('.bedno').text(bedno);
             $('.cbedno').text(cbedno);
             $('.station').text(station);
@@ -272,6 +319,8 @@
 
             $('#bedid').val(bedid);
             $('#cbedid').val(cbedid);
+            $('#roomno').val(roomno);
+            $('#croomno').val(croomno);
             $('#bedno').val(bedno);
             $('#cbedno').val(cbedno);
             $('#station').val(station);

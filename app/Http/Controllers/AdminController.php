@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Addbed;
 use App\Models\Checkin;
 use Illuminate\Support\Facades\DB;
+use Goutte\Client;
+use Symfony\Component\HttpClient\HttpClient;
+//use GuzzleHttp\Client;
+
 
 class AdminController extends Controller
 {
@@ -21,12 +25,12 @@ class AdminController extends Controller
 
     		if($usertype == 'user')
     		{
-    			$beddetails = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('building', $userbuilding)->get();
+    			$beddetails = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->get();
     			//$bedcheckdetails = checkin::orderBy('bedno', 'ASC')->where('station', $userstationcode)->whereNull('checkouttime')->get();
     			//$bedcheckdetails = DB::table('addbeds')->leftJoin('checkins', 'addbeds.id', '=', 'checkins.bedid')->whereNull('checkins.checkouttime')->get();
-    			$groundfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('building', $userbuilding)->where('floor', 0)->get();
-    			$firstfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('building', $userbuilding)->where('floor', 1)->get();
-    			$secondfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('building', $userbuilding)->where('floor', 2)->get();
+    			$groundfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('floor', 0)->get();
+    			$firstfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('floor', 1)->get();
+    			$secondfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('floor', 2)->get();
     			return view('user.index', compact('beddetails','groundfloor','firstfloor','secondfloor'));
     		}
     		elseif ($usertype == 'admin') 
@@ -79,6 +83,7 @@ class AdminController extends Controller
     	$beddata->station =  strtoupper($request->station);
     	$beddata->building =  $request->building;
     	$beddata->floor = strtoupper($request->floor);
+    	$beddata->roomno =  $request->roomno;
     	$beddata->bedno =  $request->bedno;
     	$beddata->addedby = strtoupper($request->addedby);
     	$beddata-> save();
@@ -96,6 +101,7 @@ public function checkins(Request $request)
 	$checkindata = new Checkin;
 	$checkindata->bedid = $request->bedid;
 	$checkindata->bedno = $request->bedno;
+	$checkindata->roomno = $request->roomno;
 	$checkindata->division = $request->division;
 	$checkindata->station = $request->station;
 	$checkindata->building = $request->building;
@@ -164,16 +170,15 @@ public function checkinsummary()
     	{
     		$usertype = Auth()->user()->usertype;
     		$userstationcode = Auth()->user()->stationcode;
-    		$userbuilding = Auth()->user()->building;
 
     		if($usertype == 'user')
     		{
-    			$beddetails = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('building', $userbuilding)->get();
+    			$beddetails = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->get();
     			//$bedcheckdetails = checkin::orderBy('bedno', 'ASC')->where('station', $userstationcode)->whereNull('checkouttime')->get();
     			//$bedcheckdetails = DB::table('addbeds')->leftJoin('checkins', 'addbeds.id', '=', 'checkins.bedid')->whereNull('checkins.checkouttime')->get();
-    			$groundfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('building', $userbuilding)->where('floor', 0)->get();
-    			$firstfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('building', $userbuilding)->where('floor', 1)->get();
-    			$secondfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('building', $userbuilding)->where('floor', 2)->get();
+    			$groundfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('floor', 0)->get();
+    			$firstfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('floor', 1)->get();
+    			$secondfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('floor', 2)->get();
     			return view('user.index', compact('beddetails','groundfloor','firstfloor','secondfloor'));
     		}
     		elseif ($usertype == 'admin') 
@@ -181,6 +186,33 @@ public function checkinsummary()
     			$checkindetails = checkin::orderBy('id', 'ASC')->get();
     			
     			return view('admin.checkinsummary', compact('checkindetails'));
+    		}
+    		else
+    		{
+    			return redirect()->back();
+    		}
+    	}
+}
+
+
+public function dashboard()
+{
+	if(Auth::id())
+    	{
+    		$usertype = Auth()->user()->usertype;
+    		$userstationcode = Auth()->user()->stationcode;
+
+    		if($usertype == 'user')
+    		{
+    			$beddetails = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->get();
+                
+    			return view('user.dashboard', compact('beddetails'));
+    		}
+    		elseif ($usertype == 'admin') 
+    		{
+    			$bedsummary = addbed::orderBy('id', 'ASC')->get();
+    		 
+    			return view('admin.dashboard', compact('bedsummary'));
     		}
     		else
     		{

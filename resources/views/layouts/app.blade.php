@@ -61,6 +61,46 @@
    transition: all 0.3s ease;
 }
 
+.mixcard {
+    width: 100%;
+   max-width: 250px;
+   min-width: 80px;
+   height: 120px;
+   margin: 10px;
+   border-radius: 10px;
+   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
+   border: 2px solid rgba(7, 7, 7, 0.12);
+   font-size: 16px;   
+   transition: all 0.3s ease;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   cursor: pointer;
+   transition: all 0.3s ease;
+}
+
+.usermixcard {
+    width: 100%;
+   max-width: 200px;
+   min-width: 80px;
+   height: 200px;
+   margin: 10px;
+   border-radius: 10px;
+   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
+   border: 2px solid rgba(7, 7, 7, 0.12);
+   font-size: 16px;   
+   transition: all 0.3s ease;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   cursor: pointer;
+   transition: all 0.3s ease;
+}
+
 .icon {
    margin: 0 auto;
    width: 100%;
@@ -135,6 +175,59 @@
    transition: all 0.3s ease;
 }
 
+.usermixcard .title {
+   width: 100%;
+   margin: 0;
+   text-align: center;
+   margin-top: 30px;
+   color: white;
+   font-weight: 600;
+   text-transform: uppercase;
+   letter-spacing: 4px;
+}
+
+.usermixcard .text {
+   width: 80%;
+   margin: 0 auto;
+   font-size: 13px;
+   text-align: center;
+   margin-top: 20px;
+   color: white;
+   font-weight: 200;
+   letter-spacing: 2px;
+   opacity: 0;
+   max-height:0;
+   transition: all 0.3s ease;
+}
+
+.usermixcard:hover {
+   height: 270px;
+}
+
+.usermixcard:hover .info {
+   height: 90%;
+}
+
+.usermixcard:hover .text {
+   transition: all 0.3s ease;
+   opacity: 1;
+   max-height:40px;
+   font-size: 25px;
+}
+
+.usermixcard:hover .icon {
+   background-position: -120px;
+   transition: all 0.3s ease;
+}
+
+.usermixcard:hover .icon i {
+   background: linear-gradient(90deg, #4d94ff, #4d94ff);
+   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+   opacity: 1;
+   transition: all 0.3s ease;
+}
+
         </style>
 <script src="{{ asset('js/app.js') }}" defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -171,5 +264,5 @@
 
 
     </body>
-   
+
 </html>

@@ -13,6 +13,7 @@ class checkin extends Model
         'station',
         'building',
         'division',
+        'roomno',
         'bedno',
         'crewname',
         'crewid',

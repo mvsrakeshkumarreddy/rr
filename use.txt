@@ -1,0 +1,18 @@
+NRERA1
+123
+12345
+
+buildings
+rooms
+rooms under maintenance
+total beds
+total beds under maintenance
+----
+rr - ok
+total buildings - ok
+total rooms - ok
+total beds - ok
+total beds under maintenance - ok
+total beds occupied - ok
+total beds vacant - ok
+

@@ -16,6 +16,7 @@ class CreateCheckinsTable extends Migration
         Schema::create('checkins', function (Blueprint $table) {
             $table->id();
             $table->integer('bedid')->nullable();
+            $table->integer('roomno')->nullable();
             $table->integer('bedno')->nullable();
             $table->string('station')->nullable();
             $table->integer('building')->nullable();

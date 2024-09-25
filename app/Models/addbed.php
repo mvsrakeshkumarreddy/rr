@@ -13,6 +13,7 @@ class addbed extends Model
         'station',
         'building',
         'floor',
+        'roomno',
         'bedno',
     ];
 }

@@ -22,6 +22,7 @@ class CreateAddbedsTable extends Migration
             $table->string('station')->nullable();
             $table->integer('building')->nullable();
             $table->string('floor')->nullable();
+            $table->integer('roomno')->nullable();
             $table->string('bedno')->nullable();
             $table->integer('bedstatus')->default(0);
             $table->string('addedby')->nullable();

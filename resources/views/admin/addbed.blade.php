@@ -54,6 +54,10 @@
             </div>
 <br>
 
+			<div>
+                <x-jet-label for="roomno" value="{{ __('Room No') }}" />
+                <x-jet-input id="roomno" class="block mt-1 w-full" type="text" name="roomno" :value="old('roomno')" required autofocus autocomplete="roomno" />
+            </div>
             <div>
                 <x-jet-label for="bedno" value="{{ __('Bedno') }}" />
                 <x-jet-input id="bedno" class="block mt-1 w-full" type="text" name="bedno" :value="old('bedno')" required autofocus autocomplete="bedno" />
