@@ -6,6 +6,7 @@
     </x-slot>
 
 
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -14,6 +15,22 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+      <button style="align-content: center;" ng-click="searchcheckindata=!searchcheckindata"><span ng-hide="searchcheckindata">SEARCH</span><span ng-show="searchcheckindata">X</span></button>
+      <div ng-show="searchcheckindata">
+      <input type="text" class="form-control" ng-model="search">
+      <div style="max-height: 200px;overflow: scroll;">
+          
+         <table class="table">
+      <tr ng-repeat="checkindata in checkindata | filter:search" ng-click="selectInfo(checkindata)">
+                    <td>[[checkindata.crewid]]</td>
+                    <td>[[checkindata.crewname]]</td>
+                    <td>[[checkindata.desig]]</td>
+                  </tr>
+    </table>
+      </div>
+      </div>
+
+
         <form method="post" enctype="multipart/form-data" action="{{ url('checkins') }}">
         @csrf
           <div class="mb-3">
@@ -26,15 +43,15 @@
           </div>
           <div class="mb-3">
             <label for="crewid" class="col-form-label">Crew ID</label>
-            <input type="text" class="form-control" id="crewid" required="required" name="crewid" :value="old('crewid')">
+            <input type="text" class="form-control" id="crewid" ng-model="crewid" required="required" name="crewid" :value="old('crewid')">
           </div>
           <div class="mb-3">
             <label for="crewname" class="col-form-label">Crew Name</label>
-            <input type="text" class="form-control" id="crewname" required="required" name="crewname" :value="old('crewname')">
+            <input type="text" class="form-control" id="crewname" ng-model="crewname" required="required" name="crewname" :value="old('crewname')">
           </div>
           <div>
                 <x-jet-label for="desig" value="{{ __('Designation') }}" />
-                    <select class="form-select" id="desig" name="desig">
+                    <select class="form-select" id="desig" name="desig" ng-model="desig">
                       <option value="LPM">LPM</option>
                       <option value="LPP">LPP</option>
                       <option value="LPG">LPG</option>
@@ -267,6 +284,7 @@ rakeshApp.controller('rakeshCtrl', function($scope) {
 $scope.groundfloordetails = @json($groundfloor);
 $scope.firstfloordetails = @json($firstfloor);
 $scope.secondfloordetails = @json($secondfloor);
+$scope.checkindata = @json($checkindata);
 
 for (var i = 0; i < $scope.groundfloordetails.length; i++) {
     if($scope.groundfloordetails[i]['building'] == 2)
@@ -276,7 +294,15 @@ for (var i = 0; i < $scope.groundfloordetails.length; i++) {
 }
 $scope.searchbuilding = 1;
 
+$scope.selectInfo=function(name){
+    $scope.crewid = name.crewid;
+    $scope.crewname = name.crewname;
+    $scope.desig = name.desig;
+    $scope.searchcheckindata = false;
 
+}
+
+$scope.searchcheckindata = false;
 });
 
 

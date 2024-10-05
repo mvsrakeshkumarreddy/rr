@@ -31,7 +31,8 @@ class AdminController extends Controller
     			$groundfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('floor', 0)->get();
     			$firstfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('floor', 1)->get();
     			$secondfloor = addbed::orderBy('bedno', 'ASC')->where('station', $userstationcode)->where('floor', 2)->get();
-    			return view('user.index', compact('beddetails','groundfloor','firstfloor','secondfloor'));
+                $checkindata = checkin::orderBy('id','ASC')->get();
+    			return view('user.index', compact('beddetails','groundfloor','firstfloor','secondfloor', 'checkindata'));
     		}
     		elseif ($usertype == 'admin') 
     		{

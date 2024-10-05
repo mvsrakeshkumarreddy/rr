@@ -83,9 +83,9 @@
 
 .usermixcard {
     width: 100%;
-   max-width: 200px;
+   max-width: 210px;
    min-width: 80px;
-   height: 200px;
+   height: 180px;
    margin: 10px;
    border-radius: 10px;
    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
