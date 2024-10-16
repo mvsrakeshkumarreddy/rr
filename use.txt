@@ -16,3 +16,9 @@ total beds under maintenance - ok
 total beds occupied - ok
 total beds vacant - ok
 
+db : if0_37457861_rrr
+user : if0_37457861
+host : sql313.infinityfree.com
+pass : GCqITT0Km6vp2S
+
+

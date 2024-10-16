@@ -1,10 +1,10 @@
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('User page') }}
         </h2>
     </x-slot>
-
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -307,6 +307,7 @@ $scope.searchcheckindata = false;
 
 
 </script>
+
 
     <script type="text/javascript">
         $(document).on('click', '.showdetails', function(e){

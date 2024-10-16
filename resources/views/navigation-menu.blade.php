@@ -11,31 +11,37 @@
                 </div>
 
 
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ url('/dashboard') }}" :active="request()->routeIs('/dashboard')">
+                    <x-jet-nav-link style="color: white;" href="{{ url('/dashboard') }}" :active="request()->routeIs('/dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ url('/home') }}" :active="request()->routeIs('/home')">
+                    <x-jet-nav-link style="color: white;" href="{{ url('/home') }}" :active="request()->routeIs('/home')">
                         {{ __('Home') }}
                     </x-jet-nav-link>
                 </div>
                 @if(auth()->user()->usertype == "admin")
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ url('/addbed') }}" :active="request()->routeIs('/addbed')">
+                    <x-jet-nav-link style="color: white;" href="{{ url('/addbed') }}" :active="request()->routeIs('/addbed')">
                         {{ __('Add BED') }}
                     </x-jet-nav-link>
                 </div>
                 @endif
                 @if(auth()->user()->usertype == "admin")
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ url('/checkinsummary') }}" :active="request()->routeIs('/checkinsummary')">
+                    <x-jet-nav-link style="color: white;" href="{{ url('/checkinsummary') }}" :active="request()->routeIs('/checkinsummary')">
                         {{ __('Checkin Summary') }}
                     </x-jet-nav-link>
                 </div>
                 @endif
+                <div>
+                    <marquee width="1000%" direction="right" height="100px"><i class="material-icons md-48">train</i>
+</marquee>
+                </div>
+                
 
 
 
@@ -147,7 +153,7 @@
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition" style="color: white;">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -161,26 +167,26 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
     
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ url('/dashboard') }}" :active="request()->routeIs('/dashboard')">
+            <x-jet-responsive-nav-link style="color: white;" href="{{ url('/dashboard') }}" :active="request()->routeIs('/dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
         </div>
    
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ url('/home') }}" :active="request()->routeIs('/home')">
+            <x-jet-responsive-nav-link style="color: white;" href="{{ url('/home') }}" :active="request()->routeIs('/home')">
                 {{ __('Home') }}
             </x-jet-responsive-nav-link>
         </div>
         @if(auth()->user()->usertype == "admin")
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ url('/addbed') }}" :active="request()->routeIs('/addbed')">
+            <x-jet-responsive-nav-link style="color: white;" href="{{ url('/addbed') }}" :active="request()->routeIs('/addbed')">
                 {{ __('Add Bed') }}
             </x-jet-responsive-nav-link>
         </div>
         @endif
         @if(auth()->user()->usertype == "admin")
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ url('/checkinsummary') }}" :active="request()->routeIs('/checkinsummary')">
+            <x-jet-responsive-nav-link style="color: white;" href="{{ url('/checkinsummary') }}" :active="request()->routeIs('/checkinsummary')">
                 {{ __('Checkin Summary') }}
             </x-jet-responsive-nav-link>
         </div>
@@ -196,19 +202,19 @@
                 @endif
 
                 <div>
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    <div class="font-medium text-base text-gray-800" style="color: white;">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-gray-500" style="color: white;">{{ Auth::user()->email }}</div>
                 </div>
             </div>
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                <x-jet-responsive-nav-link style="color: white;" href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                    <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
+                    <x-jet-responsive-nav-link style="color: white;" href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}
                     </x-jet-responsive-nav-link>
                 @endif
@@ -217,7 +223,7 @@
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
 
-                    <x-jet-responsive-nav-link href="{{ route('logout') }}"
+                    <x-jet-responsive-nav-link style="color: white;" href="{{ route('logout') }}"
                                    @click.prevent="$root.submit();">
                         {{ __('Log Out') }}
                     </x-jet-responsive-nav-link>
